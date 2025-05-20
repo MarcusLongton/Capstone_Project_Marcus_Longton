@@ -1,5 +1,81 @@
 # Capstone Project: Predicting Ocean Water Visibility (Turbidity) for Spearfishing.
 
+### This README.md file is split into two sections. 
+### Section 1: For readers without technical knowledge of AI/ML
+### Section 2: A more indepth and technical analysis of this project
+
+# Section 1:
+## Summary for Non-Technical Readers
+
+**What was the goal of this project?**  
+I wanted to build a tool that could help predict when the water would be clear enough for good spearfishing. The clarity of ocean water is affected by many natural forces—like how high the waves are, how warm the water is, how deep it is, and other physical factors. The cloudiness of the water is called **turbidity**, and this project aimed to forecast it using environmental data.
+
+---
+
+### 1. Problem Statement  
+This project asked a simple but practical question: *Can we predict when ocean water will be clear, using environmental measurements like wave height, water depth, and temperature?*  
+The answer can help outdoor enthusiasts, scientists, and coastal managers make smarter decisions.
+
+---
+
+### 2. What Kind of Prediction Was This?  
+This was a **prediction problem** using real-world data. Instead of labeling categories (like “yes/no”), the model tried to estimate a number—how cloudy the water would be on a given day. That’s called a **regression** problem in data science.
+
+---
+
+### 3. Where Did the Data Come From?  
+The data came from ocean monitoring equipment off the coast of Virginia. These sensors collected daily measurements like:
+- Wave height  
+- Water temperature  
+- Water pressure  
+- Turbidity (how cloudy the water was)
+
+There were two monitoring locations: a calm bay and a more exposed flat.
+
+---
+
+### 4. How Was the Data Prepared?  
+Before making predictions, the data had to be cleaned:
+- Missing values and duplicate records were checked.
+- Unhelpful time data was removed from modeling.
+- New features were created, like **Wave Energy** (a combination of wave height and wave period).
+- Data was split into two parts: one to train the models, and one to test them later.
+
+---
+
+### 5. What Types of Models Were Tried?  
+Many different types of computer models were tested:
+- A **baseline model** (that just guessed the average)
+- A **simple linear model** (like drawing a straight line through data)
+- Advanced models like **XGBoost**, **AutoML ensembles**, and **TabPFN** (which are more complex but often more accurate)
+
+---
+
+### 6. How Well Did the Models Work?  
+
+| Model                         | Error (RMSE) |
+|:------------------------------|-------------:|
+| XGBoost (finely tuned)        | 59.67        |
+| XGBoost (default settings)    | 60.76        |
+| TabPFN (Transformer model)    | 64.26        |
+| AutoML Ensemble               | 65.35        |
+| Simple Linear Model           | 83.62        |
+| Baseline (just guessing avg)  | 96.49        |
+
+Lower numbers are better—so the tuned **XGBoost model** gave the most accurate predictions.
+
+---
+
+### Final Takeaways  
+- The model can predict water clarity with good accuracy—about 8% error, which is quite solid for ocean conditions.
+- The most important things to watch for are:
+  - **Wave height**
+  - **Wave period**
+  - **Water depth**
+
+These have the biggest effect on how murky the water will be.
+
+# Section 2:
 ## Overview
 
 This project is centered around being able to predict when is a good day to go spearfishing. To answer solve this problem, I utilized every tool at my disposal from beginning to end. First with an Exploratory Data Analysis (EDA) to finally training the most advanced models at the end of my examination. 
