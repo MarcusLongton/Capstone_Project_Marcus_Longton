@@ -146,7 +146,7 @@ Turbidity appears to correlate most strongly with wave height, wave period, and 
 
 To get an idea of what types of more advanced models might perform well, H2O (Auto ML Framework) was utilized to train and tune many different models at the same time. 
 
-- Over many runs with {{max_runtime_sec}} set to between 100 - 500 seconds, **Stacked Ensemble models** consistently had the best scores of between 67 to 65 RMSE depending on the run and runtime.
+- Over many runs with `max_runtime_sec` set to between 100 - 500 seconds, **Stacked Ensemble models** consistently had the best scores of between 67 to 65 RMSE depending on the run and runtime.
 - Something to note is that on every run, the **XGBOOST** model was only a few tenths of a unit behind the **Stacked Ensemble models** atop the leaderboard.
 - From here, I decided that the next best course of action was to train and finetune a **XGBOOST** model by hand. 
 - A **Stacked Ensemble Model** using all features achieved:
@@ -169,11 +169,11 @@ From my initial Training without all default hyper-parameters
 In order to improve model performance a **GridSearchCV** model selector was utilized.
 
 - The following Parameters composed the {{param_grid}}
-  - {{max_depth}} [2,4,6,8]
-  - {{n_estimators}} [50,100]
-  - {{verbose}} = 1
-  - {{n_jobs}} = 1
-  - {{cv}} = 5
+  - `max_depth` [2,4,6,8]
+  - `n_estimators` [50,100]
+  - `verbose` = 1
+  - `n_jobs` = 1
+  - `cv` = 5
  
 - The best parameters from this model were able to achieve the lowest error score
 - The **Tuned XGBOOST** model achived
@@ -195,9 +195,9 @@ TabPFN is a foundational model for tabular data
 This project was able to successfully build a model to predict water visibility (turbidity) with an error of 8.04% (Calculated by dividing the best RMSE over the range of Turbidity in the data).
 Additionally, this project was able to identify that the following variables,
 
-- Significant Wave Height {{Hs}}
-- Average Wave Period {{Tav}}
-- Depth (m) {{Depth}}
+- Significant Wave Height `Hs`
+- Average Wave Period `Tav`
+- Depth (m) `Depth`
 
 Were the best predictors of our target variable Turbidity. 
 
@@ -211,13 +211,4 @@ Were the best predictors of our target variable Turbidity.
 | Stacked Ensemble (H2O AutoML) | 4391.96 |  65.35 |
 | Linear Regression             | 6993    |  83.62 |
 | Dummy Regressor               | 9311    |  96.49 |
-
-
-
-
-
-
-
-
-
 
