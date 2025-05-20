@@ -1,4 +1,4 @@
-# Capstone Project: Predicting Ocean Water Visibility (Turbidity) for Spear Fishing.
+# Capstone Project: Predicting Ocean Water Visibility (Turbidity) for Spearfishing.
 
 ## Overview
 
