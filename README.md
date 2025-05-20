@@ -1,9 +1,9 @@
-# Capstone Project: Exploratory Data Analysis (EDA) and Baseline Model
+# Capstone Project: Predicting Ocean Water Visibility (Turbidity) for Spear Fishing.
 
 ## Overview
 
-This project is the initial stage of my Capstone, focusing on exploratory data analysis (EDA), feature engineering, and the development of a baseline machine learning model.  
-The goal of this phase is to understand the underlying structure and relationships within the dataset and build a simple baseline model to predict turbidity, which will be further refined in Module 24.
+This project is centered around being able to predict when is a good day to go spearfishing. To answer solve this problem, I utilized every tool at my disposal from beginning to end. First with an Exploratory Data Analysis (EDA) to finally training the most advanced models at the end of my examination. 
+The goal was to understand the underlying structure and relationships within the dataset and build a model to predict turbidity
 
 ## Research Question
 
@@ -135,39 +135,89 @@ Based on initial model performance:
 
 - The **Dummy Regressor** established a baseline with a test MSE of ~9311.
 - A **Linear Regression model** using all features achieved:
-  - **Train MSE**: ~6075
   - **Test MSE**: ~6993
-  - **Train R²**: ~0.3589
-  - **Test R²**: ~0.4914
+  - **Test RMSE**: ~83.62
 
 These results indicate that the model was able to capture meaningful variance in turbidity based on the available environmental features. The model performed better than the dummy baseline, especially on unseen test data, suggesting some generalization capability.
 
 Turbidity appears to correlate most strongly with wave height, wave period, and water temperature. Outliers and nonlinear relationships may be influencing performance.
 
-## Next Steps
+## Utilizing an Auto Machine Learning Framework
 
-In Module 24, I will enhance this analysis with the following:
+To get an idea of what types of more advanced models might perform well, H2O (Auto ML Framework) was utilized to train and tune many different models at the same time. 
 
-- **Model Exploration**:  
-  - Train additional models such as `RandomForestRegressor`, `GradientBoostingRegressor`, and `XGBoost`.
-  - Compare their performance with Linear Regression to evaluate improvements in handling nonlinear relationships and feature interactions.
-
-- **Feature Engineering**:  
-  - Add **polynomial features** (e.g., squared wave height, interaction terms) to help linear models capture curvature and interactions.
-  - Experiment with **lagged features** (e.g., turbidity shifted by 1–3 time steps) to capture temporal influence.
-  - Consider reducing variance with **log-transformation** of highly skewed targets.
-
-- **Hyperparameter Tuning**:  
-  - Use `GridSearchCV` or `RandomizedSearchCV` to optimize model parameters (e.g., number of trees, max depth).
-  - Evaluate using cross-validated metrics like R², RMSE, and MAE.
-
-- **Model Evaluation and Communication**:  
-  - Plot residuals, feature importances, and partial dependence plots.
-  - Prepare final documentation with both **technical** and **non-technical** summaries.
+- Over many runs with {{max_runtime_sec}} set to between 100 - 500 seconds, **Stacked Ensemble models** consistently had the best scores of between 67 to 65 RMSE depending on the run and runtime.
+- Something to note is that on every run, the **XGBOOST** model was only a few tenths of a unit behind the **Stacked Ensemble models** atop the leaderboard.
+- From here, I decided that the next best course of action was to train and finetune a **XGBOOST** model by hand. 
+- A **Stacked Ensemble Model** using all features achieved:
+  - **Test MSE**: ~4391.96
+  - **Test RMSE**: ~65.35
+  - These scores represent a decrease in error of 27%
 
 
-## Directory Structure
+## Training an XGBOOST model
 
-```plaintext
-Capstone_EDA.ipynb    # Jupyter notebook containing all code, visualizations, and modeling
-README.md             # Project summary and results
+From my initial Training without all default hyper-parameters 
+
+- The **XGBOOST** model achived
+  - **Test MSE**: ~3692.93
+  - **Test RMSE**: ~60.76 
+  - This again resulted in a decrease in error of 7% from the previous best model
+ 
+## Fine-Tuning XGBOOST model with GridSearchCV
+
+In order to improve model performance a **GridSearchCV** model selector was utilized.
+
+- The following Parameters composed the {{param_grid}}
+  - {{max_depth}} [2,4,6,8]
+  - {{n_estimators}} [50,100]
+  - {{verbose}} = 1
+  - {{n_jobs}} = 1
+  - {{cv}} = 5
+ 
+- The best parameters from this model were able to achieve the lowest error score
+- The **Tuned XGBOOST** model achived
+  - **Test MSE**: ~3561.52
+  - **Test RMSE**: ~59.67
+  - This resulted in a decrease in error of 1.8% from the previous best model
+ 
+## TabPFN Regressor (Final Model Trained)
+
+TabPFN is a foundational model for tabular data
+
+- The **TabPFN** model achived
+  - **Test MSE**: ~4129.6
+  - **Test RMSE**: ~64.26
+  - This resulted in an increase in error from our **Tuned XGBOOST** model
+ 
+## Conclusion:
+
+This project was able to successfully build a model to predict water visibility (turbidity) with an error of 8.04% (Calculated by dividing the best RMSE over the range of Turbidity in the data).
+Additionally, this project was able to identify that the following variables,
+
+- Significant Wave Height {{Hs}}
+- Average Wave Period {{Tav}}
+- Depth (m) {{Depth}}
+
+Were the best predictors of our target variable Turbidity. 
+
+## Model Performance Summary
+
+| Model                         |     MSE |   RMSE |
+|:------------------------------|--------:|-------:|
+| XGBoost (GridSearchCV tuned)  | 3561.52 |  59.67 |
+| XGBoost (default params)      | 3692.93 |  60.76 |
+| TabPFN                        | 4129.6  |  64.26 |
+| Stacked Ensemble (H2O AutoML) | 4391.96 |  65.35 |
+| Linear Regression             | 6993    |  83.62 |
+| Dummy Regressor               | 9311    |  96.49 |
+
+
+
+
+
+
+
+
+
+
