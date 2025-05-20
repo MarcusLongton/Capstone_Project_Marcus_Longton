@@ -2,7 +2,7 @@
 
 ### This README.md file is split into two sections. 
 ### Section 1: For readers without technical knowledge of AI/ML
-### Section 2: A more indepth and technical analysis of this project
+### Section 2: A more indepth and technical analysis of this project for readers with a background in AI/ML
 
 # Section 1:
 ## Summary for Non-Technical Readers
