@@ -2,7 +2,7 @@
 
 ### This README.md file is split into two sections. 
 ### Section 1: For readers without technical knowledge of AI/ML
-### Section 2: A more indepth and technical analysis of this project for readers with a background in AI/ML
+### Section 2: A more in-depth and technical analysis of this project for readers with a background in AI/ML
 
 # Section 1:
 ## Summary for Non-Technical Readers
@@ -78,7 +78,7 @@ These have the biggest effect on how murky the water will be.
 # Section 2:
 ## Overview
 
-This project is centered around being able to predict when is a good day to go spearfishing. To answer solve this problem, I utilized every tool at my disposal from beginning to end. First with an Exploratory Data Analysis (EDA) to finally training the most advanced models at the end of my examination. 
+This project is centered around being able to predict when is a good day to go spearfishing. To solve this problem, I utilized every tool at my disposal from beginning to end. First with an Exploratory Data Analysis (EDA) to finally training the most advanced models at the end of my examination. 
 The goal was to understand the underlying structure and relationships within the dataset and build a model to predict turbidity
 
 ## Research Question
@@ -224,7 +224,7 @@ To get an idea of what types of more advanced models might perform well, H2O (Au
 
 - Over many runs with `max_runtime_sec` set to between 100 - 500 seconds, **Stacked Ensemble models** consistently had the best scores of between 67 to 65 RMSE depending on the run and runtime.
 - Something to note is that on every run, the **XGBOOST** model was only a few tenths of a unit behind the **Stacked Ensemble models** atop the leaderboard.
-- From here, I decided that the next best course of action was to train and finetune a **XGBOOST** model by hand. 
+- From here, I decided that the next best course of action was to train and fine-tune a **XGBOOST** model by hand. 
 - A **Stacked Ensemble Model** using all features achieved:
   - **Test MSE**: ~4391.96
   - **Test RMSE**: ~65.35
@@ -233,16 +233,16 @@ To get an idea of what types of more advanced models might perform well, H2O (Au
 
 ## Training an XGBOOST model
 
-From my initial Training without all default hyper-parameters 
+From my initial training without all default hyper-parameters 
 
-- The **XGBOOST** model achived
+- The **XGBOOST** model achieved
   - **Test MSE**: ~3692.93
   - **Test RMSE**: ~60.76 
-  - This again resulted in a decrease in error of 7% from the previous best model
+  - This again reduced the error by 7% from the previous best model
  
 ## Fine-Tuning XGBOOST model with GridSearchCV
 
-In order to improve model performance a **GridSearchCV** model selector was utilized.
+In order to improve model performance a **GridSearchCV** tuning method was used.
 
 - The following Parameters composed the {{param_grid}}
   - `max_depth` [2,4,6,8]
