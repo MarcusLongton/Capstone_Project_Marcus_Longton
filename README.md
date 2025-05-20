@@ -1,8 +1,9 @@
 # Capstone Project: Predicting Ocean Water Visibility (Turbidity) for Spearfishing.
 
-### This README.md file is split into two sections. 
-### Section 1: For readers without technical knowledge of AI/ML
-### Section 2: A more in-depth and technical analysis of this project for readers with a background in AI/ML
+ **This README.md file is split into two sections:** 
+ 
+ **Section 1: For readers without technical knowledge of AI/ML** <br>
+ **Section 2: A more in-depth and technical analysis of this project for readers with a background in AI/ML**
 
 # Section 1:
 ## Summary for Non-Technical Readers
